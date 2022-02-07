@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+const int INF = 2e9;
+int n, m, dp[100006], par[100006], vis[100006];
+vector<int> adj[100006];
+ 
+void dfs(int node)
+{
+    vis[node] = 1;
+    for(auto it: adj[node]) 
+    {
+        if(!vis[it]) 
+        dfs(it);
+        if(dp[it] != -INF && dp[node] < dp[it] + 1 )
+        {
+            dp[node] = dp[it] + 1;
+            par[node] =it;
+        }
+    }
+}
+
+int main()
+{
+    cin >> n >> m;
+    
+    for(int i=0; i<m; i++){
+        int x, y;
+        cin >> x >> y;
+        adj[x].push_back(y);
+    }
+    par[n] = -1;
+    for(int i=1; i<n; i++) 
+	  dp[i] = -INF;
+    for(int i=1; i<=n; i++)
+        if(!vis[i])
+        dfs(i);
+ 
+    if(dp[1] == -INF){
+        cout << "IMPOSSIBLE";
+        return 0;
+    }
+ 
+    vector<int> res;
+    int k= 1;
+ 
+    while(k != -1) {
+        res.push_back(k);
+        k= par[k];
+    }
+    
+    cout << res.size() << "\n";
+    for(auto it: res) 
+    cout << it << " ";
+    return 0;
+}
