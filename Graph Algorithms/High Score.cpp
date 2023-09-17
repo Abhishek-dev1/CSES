@@ -29,7 +29,7 @@ int main()
 	}
 vector<ll>dis(n+1,inf);
 dis[1]=0;
-for(ll i=0;i<n-1;i++)
+for(ll i=0;i<n;i++)
 {
 	for(auto it:adj)
 	{
@@ -41,7 +41,7 @@ for(ll i=0;i<n-1;i++)
 	}
 }
 
-for(int i = 0; i < n-1; i++)
+for(int i = 0; i < n; i++)
 	{
 		for(auto it: adj)
 		{
